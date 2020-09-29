@@ -1,0 +1,62 @@
+<body>
+<br><br>
+
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+
+
+            <div class="container">
+                <div class="card bg-secondary text-white">
+                    <div class="card-body">
+
+                        <h3 align="center">Log In</h3>
+                        <div align="center">
+
+                            <form #userForm="ngForm" (ngSubmit)='onSubmit(userForm.value)'>
+
+                                <div class="form-group">
+                                    <label>Username </label>
+
+                                    <input required type="text" #usernameRef='ngModel' name="userName" ngModel
+                                        class="form-control"
+                                        [class.is-invalid]="usernameRef.invalid && usernameRef.touched">
+
+                                    <div *ngIf="usernameRef.errors&&(usernameRef.invalid&& usernameRef.touched)">
+                                        <small class=" text-light" *ngIf="usernameRef.errors.required">* User name is
+                                            Required</small>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label>Password </label>
+
+                                    <input required minlength="4" id="password" type="password"
+                                        #userpasswordRef="ngModel" name="userPassword" class="form-control" ngModel
+                                        pattern="[A-Za-z0-9]{5,}"
+                                        [class.is-invalid]="userpasswordRef.invalid && userpasswordRef.touched">
+                                    <div
+                                        *ngIf="userpasswordRef.errors&&(userpasswordRef.invalid&& userpasswordRef.touched)">
+                                        <small class=" text-light" *ngIf="userpasswordRef.errors.required">*Password is
+                                            Required</small>
+                                        <small class=" text-light" *ngIf="userpasswordRef.errors.pattern">*Password
+                                            should be atleast 5 charecters</small>
+                                    </div>
+
+                                </div>
+                                <small class="text-light">{{msg}}</small><br>
+                                <div class="form-group text-center">
+                                    <input [disabled]="userForm.invalid" type="submit" value="Login"
+                                        class="btn btn-success">
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

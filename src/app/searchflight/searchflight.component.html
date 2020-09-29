@@ -1,0 +1,70 @@
+
+<br>
+<div class="col-md-4 mx-auto alert alert-success" *ngIf="msg != undefined">{{msg}}</div>
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <br>
+        <div class="container">
+
+
+            <input type="number" type="number" #flightnumberRef="ngModel" placeholder="Flight Number"
+                pattern="^$|^([1-9]{1,})?" name="flightNumber" [(ngModel)]="flightnumber" required
+                [class.is-invalid]="flightnumberRef.invalid && flightnumberRef.touched">&nbsp;
+            <button [disabled]="flightnumberRef.invalid" type="submit" class="btn btn-primary" (click)=getflight()>Search<i
+                    class="fa fa-search"></i></button>
+            <div *ngIf="flightnumberRef.errors&&(flightnumberRef.invalid&& flightnumberRef.touched)">
+                <small class=" text-danger" *ngIf="flightnumberRef.errors.required">Flight Number is Required</small>
+                <small class=" text-danger" *ngIf="flightnumberRef.errors.pattern">Flight Nunmber should not be
+                    zero</small>
+
+            </div>
+        </div>
+
+
+
+        <div align="right">
+            <input type="submit" routerLink='/adminoperations' value="Go Back" class="btn btn-primary">
+        </div>
+
+
+        <br>
+
+        <div  align="center" *ngIf="flight!=null else elseBlock">
+            <table class="table table-striped">
+
+                <tbody align="center">
+                    <tr>
+                        <th>FLIGHT NUMBER</th>
+                        <td> {{flight.flightNumber}} </td>
+                    </tr>
+                    <tr>
+                        <th>FLIGHT MODEL</th>
+                        <td> {{flight.flightMdel}} </td>
+                    </tr>
+
+                    <tr>
+                        <th>CARRIER NAME</th>
+                        <td>{{flight.carrierName}}</td>
+                    </tr>
+                    <tr>
+                        <th>SEAT CAPACITY</th>
+                        <td> {{flight.seatCapacity}} </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button type="button" class="btn btn-danger" (click)=delete(flight)>Delete</button>
+            &nbsp;&nbsp;
+
+            <button type="button" class="btn btn-primary" (click)=updateflight(flight)>Update</button>
+
+        </div>
+        <ng-template #elseBlock>
+            <h4 align="center" [class.d-none]="flightnumberRef.untouched">Not Available</h4>
+        </ng-template>
+    </div>
+</div>
+
+
+<router-outlet></router-outlet>

@@ -1,0 +1,84 @@
+<br>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <div class="container">
+      <div class="card bg-info text-white">
+        <div class="card-body">
+
+          <h3 class="text-center">Add Flight</h3>
+
+          <form #addFlight="ngForm" (ngSubmit)="onSubmit();addFlight.reset()">
+            <div class="form-group">
+              <label for="name">Flight Number</label>
+              <input type="number" class="form-control" id="flightNumber" #flightNumber="ngModel" required
+                [(ngModel)]="flight.flightNumber" name="flightNumber" pattern="^$|^([1-9]|[1-9][0-9]{1,})?"
+                [class.is-invalid]="flightNumber.invalid && flightNumber.touched">
+
+              <div *ngIf="flightNumber.errors&&(flightNumber.invalid&& flightNumber.touched)">
+                <small class=" text-warning" *ngIf="flightNumber.errors.required">Flight Number is Required</small>
+                <small class=" text-warning" *ngIf="flightNumber.errors.pattern">Flight Nunmber should not be
+                  zero</small>
+
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="name">Flight Model</label>
+              <input type="text" class="form-control" id="flightModel" [(ngModel)]="flight.flightMdel"
+                name="flightModel" required #flightmodel="ngModel" pattern="[A-Za-z0-9\s\-]{3,}"
+                [class.is-invalid]="flightmodel.invalid && flightmodel.touched">
+              <div *ngIf="flightmodel.errors && (flightmodel.invalid&& flightmodel.touched)">
+                <small class=" text-warning" *ngIf="flightmodel.errors.required">Flight Model is Required</small>
+                <small class=" text-warning" *ngIf="flightmodel.errors.pattern">Flight model should be alpha-numeric
+                  with atleast 3 charecters</small>
+
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="name">Carrier Name</label>
+              <input type="text" class="form-control" id="carrierName" required [(ngModel)]="flight.carrierName"
+                name="carrierName" pattern="[A-Za-z\s]{5,}" #carriername="ngModel"
+                [class.is-invalid]="carriername.invalid && carriername.touched">
+              <div *ngIf="carriername.errors && (carriername.invalid&& carriername.touched)">
+                <small class=" text-warning" *ngIf="carriername.errors.required">Carrier Name is Required</small>
+                <small class=" text-warning" *ngIf="carriername.errors.pattern">Carrier should be alphabets with atleast
+                  5 charecters</small>
+
+              </div>
+
+            </div>
+            <div class="form-group">
+              <label for="name">Seat Capacity</label>
+              <input type="number" class="form-control" id="seatCapacity" required #seatcapacity="ngModel"
+                [(ngModel)]="flight.seatCapacity" name="seatCapacity"
+                pattern="^$|^([1-9]|[1-9][0-9]|[1-2][0-9][0-9]|300)?"
+                [class.is-invalid]="seatcapacity.invalid && seatcapacity.touched">
+              <div *ngIf="seatcapacity.errors && (seatcapacity.invalid && seatcapacity.touched)">
+                <small class=" text-warning" *ngIf="seatcapacity.errors.required">Seat Capacity is Required</small>
+                <small class=" text-warning" *ngIf="seatcapacity.errors.pattern">Seat Capacity should be from 1 to
+                  300</small>
+
+              </div>
+            </div>
+
+            <button [disabled]="addFlight.form.invalid" type="submit" class="btn btn-success">Submit</button>
+
+            <h4>{{msg}}</h4>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  
+  <br>
+  <div align="right">
+    <input type="submit" routerLink='/adminoperations' value="Go Back" class="btn btn-primary">
+
+
+  </div>
+</div>
+</div>
+<router-outlet></router-outlet>
